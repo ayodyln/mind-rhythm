@@ -4,6 +4,7 @@
 
 	// Floating UI for Popups
 	import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
+	import GreetingCard from '../components/dashboard/GreetingCard.svelte';
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
 </script>
 
@@ -31,10 +32,15 @@
 	</svelte:fragment>
 
 	<!-- <svelte:fragment slot="sidebarLeft" /> -->
-	<svelte:fragment slot="sidebarRight">Sidebar Right</svelte:fragment>
+	<svelte:fragment slot="sidebarRight">
+		<div class="card-header">
+			<h1>Right panel</h1>
+		</div>
+	</svelte:fragment>
 
 	<!-- Router Slot -->
-	<section id="slot__wrapper" class="container p-4">
+	<section id="slot__wrapper" class="container p-4 h-full">
+		<GreetingCard />
 		<slot />
 	</section>
 	<!-- ---- / ---- -->
