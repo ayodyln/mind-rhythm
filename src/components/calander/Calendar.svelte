@@ -77,7 +77,7 @@
 	});
 </script>
 
-<section id="CalanderCard" class="w-fit h-[394px] card p-4 space-y-2">
+<section id="CalanderCard" class="w-fit h-[394px] card p-4 space-y-2 flex flex-col">
 	<CalanderNav {mmyy_Str} {navigateMonth} />
 	<CalanderTable {weeks} {today} {selectedMMYY} />
 </section>
