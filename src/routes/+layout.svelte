@@ -23,7 +23,9 @@
 	<svelte:fragment slot="sidebarRight">Sidebar Right</svelte:fragment>
 
 	<!-- Router Slot -->
-	<slot />
+	<section id="slot__wrapper" class="p-4">
+		<slot />
+	</section>
 	<!-- ---- / ---- -->
 
 	<svelte:fragment slot="pageFooter">Page Footer</svelte:fragment>

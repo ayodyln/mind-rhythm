@@ -76,7 +76,7 @@
 	});
 </script>
 
-<section id="CalanderCard" class="max-w-xs w-fit h-fit card p-4 space-y-2">
+<section id="CalanderCard" class="max-w-sm w-fit h-fit card p-4 space-y-2">
 	<CalanderNav {todayStr} {navigateMonth} />
-	<CalanderTable {weeks} />
+	<CalanderTable {weeks} {today} />
 </section>

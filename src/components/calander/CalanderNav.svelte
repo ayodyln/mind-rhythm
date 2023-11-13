@@ -1,5 +1,4 @@
 <script lang="ts">
-	// CalanderNav component
 	export let todayStr: string, navigateMonth: any;
 </script>
 
@@ -57,5 +56,5 @@
 	</button>
 </nav>
 
-<div class="w-full h-1 rounded-lg bg-primary-500 my-2"></div>
+<div class="w-full h-1 rounded-lg bg-surface-500 my-2"></div>
 </div>
