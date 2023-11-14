@@ -71,10 +71,7 @@
 	});
 </script>
 
-<section
-	id="CalanderCard"
-	class="w-full max-w-[350px] max-h-[400px] card p-4 space-y-2 flex flex-col drop-shadow-lg"
->
+<section id="CalanderCard" class="max-h-[400px] card p-4 space-y-2 flex flex-col drop-shadow-lg">
 	<CalanderNav mmyy_Str={$selectedDate} {navigateMonth} />
 	<CalanderTable {today} {weeks} {weekDays} selectedDate={$selectedDate} />
 </section>

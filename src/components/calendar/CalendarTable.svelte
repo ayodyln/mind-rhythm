@@ -18,9 +18,9 @@
 			<tr>
 				{#each weekDays as day}
 					{#if day === 'Sun' || day === 'Sat'}
-						<th class="text-surface-500">{day}</th>
+						<th class="text-surface-500 w-[44px]">{day}</th>
 					{:else}
-						<th>{day}</th>
+						<th class="w-[44px]">{day}</th>
 					{/if}
 				{/each}
 			</tr>
@@ -29,11 +29,11 @@
 			{#each weeks as week}
 				<tr>
 					{#each week as day}
-						<td class="h-[44px] w-[44px]">
+						<td>
 							<button
 								on:click={() => dayClicked(day)}
 								class:bg-primary-500={highlightedDate(day)}
-								class="h-full w-full rounded-full hover:bg-surface-500/50 flex justify-center items-center"
+								class="w-[44px] h-[44px] rounded-full hover:bg-surface-500/50 flex justify-center items-center"
 								type="button"
 							>
 								{day}

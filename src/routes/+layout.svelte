@@ -10,8 +10,8 @@
 </script>
 
 <AppShell
-	slotHeader="flex items-center justify-between p-4 card"
-	slotSidebarRight="max-w-[350px] w-full rounded-none px-4 py-2 border-l-2 border-surface-500/50 my-2"
+	slotHeader="flex items-center justify-between p-4 card rounded"
+	slotSidebarRight="w-fit max-w-sm rounded-none px-4 py-2 border-l-2 border-surface-500/50 my-2"
 >
 	<svelte:fragment slot="header">
 		<a href="/" class="btn rounded-lg font-bold variant-soft">MindRhythm</a>
@@ -32,15 +32,16 @@
 	</svelte:fragment>
 
 	<!-- <svelte:fragment slot="sidebarLeft" /> -->
-	<svelte:fragment slot="sidebarRight">
-		<Calendar />
-	</svelte:fragment>
 
 	<!-- Router Slot -->
 	<section id="slot__wrapper" class="container p-4 h-full flex">
 		<slot />
 	</section>
 	<!-- ---- / ---- -->
+
+	<svelte:fragment slot="sidebarRight">
+		<Calendar />
+	</svelte:fragment>
 
 	<!-- <svelte:fragment slot="pageFooter">Page Footer</svelte:fragment> -->
 	<!-- <svelte:fragment slot="footer">Footer</svelte:fragment> -->
