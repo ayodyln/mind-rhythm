@@ -11,7 +11,7 @@
 
 <AppShell
 	slotHeader="flex items-center justify-between p-4 card rounded"
-	slotSidebarRight="w-fit max-w-sm rounded-none px-4 py-2 my-2"
+	slotSidebarRight="w-fit max-w-sm rounded-none px-4 py-2 my-2 border-l-2 border-surface-500/50"
 >
 	<svelte:fragment slot="header">
 		<a href="/" class="btn rounded-lg font-bold variant-soft">MindRhythm</a>
