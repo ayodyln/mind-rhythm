@@ -2,16 +2,14 @@
 	import { onMount } from 'svelte';
 	import CalanderNav from './CalendarNav.svelte';
 	import CalanderTable from './CalendarTable.svelte';
+	import { currentDate, selectedDate } from '$lib';
 
-	$: [today, selectedMMYY] = [new Date(), new Date()];
+	$: today = $currentDate;
 	$: year = today.getFullYear() satisfies number;
 	$: month = today.getMonth() satisfies number;
-	$: mmyy_Str = new Intl.DateTimeFormat('en-US', {
-		month: 'long',
-		year: 'numeric'
-	}).format(today);
 
 	let weeks: (string | number)[][] = [];
+	const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 	function createweeks() {
 		/* 
@@ -54,21 +52,17 @@
 
 	function navigateMonth(direction: boolean) {
 		if (direction) {
-			month === 11 ? year++ && (month = 0) : month++;
-			selectedMMYY = new Date(year, month, 1);
-			mmyy_Str = new Intl.DateTimeFormat('en-US', {
-				month: 'long',
-				year: 'numeric'
-			}).format(selectedMMYY);
+			if (month === 11) {
+				year++;
+				month = 0;
+			} else month++;
 		} else {
-			month === 0 ? year-- && (month = 11) : month--;
-			selectedMMYY = new Date(year, month, 1);
-			mmyy_Str = new Intl.DateTimeFormat('en-US', {
-				month: 'long',
-				year: 'numeric'
-			}).format(selectedMMYY);
+			if (month === 0) {
+				year--;
+				month = 11;
+			} else month--;
 		}
-
+		$selectedDate = new Date(year, month, 1);
 		createweeks();
 	}
 
@@ -77,7 +71,10 @@
 	});
 </script>
 
-<section id="CalanderCard" class="w-fit h-[400px] card variant-soft p-4 space-y-2 flex flex-col drop-shadow-lg">
-	<CalanderNav {mmyy_Str} {navigateMonth} />
-	<CalanderTable {weeks} {today} {selectedMMYY} />
+<section
+	id="CalanderCard"
+	class="w-full max-w-[350px] max-h-[400px] card p-4 space-y-2 flex flex-col drop-shadow-lg"
+>
+	<CalanderNav mmyy_Str={$selectedDate} {navigateMonth} />
+	<CalanderTable {today} {weeks} {weekDays} selectedDate={$selectedDate} />
 </section>

@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let mmyy_Str: string, navigateMonth: any;
+	export let mmyy_Str: Date, navigateMonth: any;
 </script>
 
 <div>
@@ -32,7 +32,9 @@
 		</button>
 
 		<div class="w-full text-center">
-			<h5 class="h5">{mmyy_Str}</h5>
+			<h5 class="h5">
+				{new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric' }).format(mmyy_Str)}
+			</h5>
 		</div>
 
 		<button

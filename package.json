@@ -15,6 +15,13 @@
     "tdev": "tauri dev"
   },
   "devDependencies": {
+    "@event-calendar/core": "^2.4.1",
+    "@event-calendar/day-grid": "^2.4.1",
+    "@event-calendar/interaction": "^2.4.1",
+    "@event-calendar/list": "^2.4.1",
+    "@event-calendar/resource-time-grid": "^2.4.1",
+    "@event-calendar/time-grid": "^2.4.1",
+    "@faker-js/faker": "^8.2.0",
     "@skeletonlabs/skeleton": "2.5.0",
     "@skeletonlabs/tw-plugin": "0.2.4",
     "@sveltejs/adapter-auto": "^2.0.0",

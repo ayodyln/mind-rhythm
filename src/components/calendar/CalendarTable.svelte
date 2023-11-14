@@ -1,25 +1,14 @@
 <script lang="ts">
-	export let weeks: any[] = [],
-		today: Date,
-		selectedMMYY: Date;
-
-	const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
-	let selectedDate: string = Intl.DateTimeFormat('en-us', {
-		year: 'numeric',
-		month: 'long',
-		day: 'numeric'
-	}).format(new Date(selectedMMYY.getFullYear(), selectedMMYY.getMonth(), selectedMMYY.getDate()));
+	export let today: Date;
+	export let weeks: any[] = [];
+	export let weekDays: any[] = [];
+	export let selectedDate: Date;
 
 	const highlightedDate = (day: number): boolean =>
-		day === today.getDate() && today.getMonth() === selectedMMYY.getMonth();
+		day === today.getDate() && today.getMonth() === selectedDate.getMonth();
 
 	function dayClicked(day: number) {
-		selectedDate = Intl.DateTimeFormat('en-us', {
-			year: 'numeric',
-			month: 'long',
-			day: 'numeric'
-		}).format(new Date(selectedMMYY.getFullYear(), selectedMMYY.getMonth(), day));
+		console.log(day);
 	}
 </script>
 
@@ -55,11 +44,4 @@
 			{/each}
 		</tbody>
 	</table>
-
-	<footer>
-		<div class="text-xs font-thin">
-			<span>Selected Date:</span>
-			<span>{selectedDate}</span>
-		</div>
-	</footer>
 </section>

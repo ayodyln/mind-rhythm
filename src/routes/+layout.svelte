@@ -4,43 +4,40 @@
 
 	// Floating UI for Popups
 	import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
-	import GreetingCard from '../components/dashboard/GreetingCard.svelte';
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
+
+	import Calendar from '../components/calendar/Calendar.svelte';
 </script>
 
-<AppShell slotSidebarRight="card max-w-[300px] w-full rounded-none p-4">
+<AppShell
+	slotHeader="flex items-center justify-between p-4 card"
+	slotSidebarRight="max-w-[350px] w-full rounded-none px-4 py-2 border-l-2 border-surface-500/50 my-2"
+>
 	<svelte:fragment slot="header">
-		<AppBar padding="px-4 py-2" slotTrail="space-x-4">
-			<svelte:fragment slot="lead">
-				<a href="/" class="btn rounded-lg font-bold variant-soft">MindRhythm</a>
-			</svelte:fragment>
+		<a href="/" class="btn rounded-lg font-bold variant-soft">MindRhythm</a>
 
-			<svelte:fragment slot="trail">
-				<LightSwitch />
+		<div class="flex items-center gap-4">
+			<LightSwitch />
 
-				<button class="drop-shadow-lg">
-					<Avatar
-						src="https://images.unsplash.com/photo-1617296538902-887900d9b592?ixid=M3w0Njc5ODF8MHwxfGFsbHx8fHx8fHx8fDE2ODc5NzExMDB8&ixlib=rb-4.0.3&w=128&h=128&auto=format&fit=crop"
-						width="w-12"
-						rounded="rounded-full"
-						border="border-4 border-surface-300-600-token hover:!border-primary-500"
-						cursor="cursor-pointer"
-					/>
-				</button>
-			</svelte:fragment>
-		</AppBar>
+			<button class="drop-shadow-lg">
+				<Avatar
+					src="https://images.unsplash.com/photo-1617296538902-887900d9b592?ixid=M3w0Njc5ODF8MHwxfGFsbHx8fHx8fHx8fDE2ODc5NzExMDB8&ixlib=rb-4.0.3&w=128&h=128&auto=format&fit=crop"
+					width="w-12"
+					rounded="rounded-full"
+					border="border-4 border-surface-300-600-token hover:!border-primary-500"
+					cursor="cursor-pointer"
+				/>
+			</button>
+		</div>
 	</svelte:fragment>
 
 	<!-- <svelte:fragment slot="sidebarLeft" /> -->
 	<svelte:fragment slot="sidebarRight">
-		<div class="card-header">
-			<h1>Right panel</h1>
-		</div>
+		<Calendar />
 	</svelte:fragment>
 
 	<!-- Router Slot -->
-	<section id="slot__wrapper" class="container p-4 h-full">
-		<GreetingCard />
+	<section id="slot__wrapper" class="container p-4 h-full flex">
 		<slot />
 	</section>
 	<!-- ---- / ---- -->
