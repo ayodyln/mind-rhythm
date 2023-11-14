@@ -2,6 +2,7 @@
 	import '../app.postcss';
 	import { AppShell, AppBar, Avatar, storePopup, LightSwitch } from '@skeletonlabs/skeleton';
 	import { faker } from '@faker-js/faker';
+	import { currentDate, selectedCalenderDate, userSelectedDate } from '$lib';
 
 	// Floating UI for Popups
 	import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
@@ -9,20 +10,39 @@
 
 	import Calendar from '../components/calendar/Calendar.svelte';
 	import { invoke } from '@tauri-apps/api/tauri';
+	import { onMount } from 'svelte';
 
 	async function greet() {
 		console.log(await invoke('greet', { name: 'Dylan Smith' }));
 	}
-	// 2023-11-14T02:40:40.706Z
-	// $: console.log(new Date()?.toISOString());
+
+	let time: Date = new Date();
+	$: clockStr = new Intl.DateTimeFormat('en-US', {
+		hour: '2-digit',
+		minute: '2-digit'
+	}).format(time);
+
+	onMount(() => {
+		const interval = setInterval(() => {
+			time = new Date();
+		}, 1000);
+
+		return () => {
+			clearInterval(interval);
+		};
+	});
 </script>
 
 <AppShell
-	slotHeader="flex items-center justify-between p-4 card rounded"
+	slotHeader="flex items-center justify-between p-4 py-2 card rounded-none"
 	slotSidebarRight="w-fit max-w-sm rounded-none px-4 py-2 my-2 border-l-2 border-surface-500/50"
 >
 	<svelte:fragment slot="header">
 		<a href="/" class="btn rounded-lg font-bold variant-soft">MindRhythm</a>
+
+		<div>
+			<span>{clockStr}</span>
+		</div>
 
 		<ul class="list-nav flex items-center gap-4">
 			<li>
