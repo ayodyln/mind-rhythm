@@ -1,4 +1,8 @@
-<script lang="ts"></script>
+<script lang="ts">
+	import { currentDate, selectedCalenderDate, userSelectedDate } from '$lib';
+
+	$: dateStr = $userSelectedDate;
+</script>
 
 <nav>
 	<div class="flex card variant-soft w-fit h-11">
@@ -13,7 +17,13 @@
 			</span>
 		</button>
 		<div class="w-32 flex items-center justify-center h-full border-x-2 border-surface-500/20">
-			<p class="text-xs">Text Content</p>
+			<p class="text-xs">
+				{new Intl.DateTimeFormat('en-US', {
+					day: 'numeric',
+					month: 'short',
+					year: 'numeric'
+				}).format(dateStr)}
+			</p>
 		</div>
 		<button class="btn">
 			<span>

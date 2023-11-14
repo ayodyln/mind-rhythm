@@ -2,14 +2,11 @@
 	export let today: Date;
 	export let weeks: any[] = [];
 	export let weekDays: any[] = [];
-	export let selectedDate: Date;
+	export let selectedCalenderDate: Date;
+	export let dayClicked: Function;
 
 	const highlightedDate = (day: number): boolean =>
-		day === today.getDate() && today.getMonth() === selectedDate.getMonth();
-
-	function dayClicked(day: number) {
-		console.log(day);
-	}
+		day === today.getDate() && today.getMonth() === selectedCalenderDate.getMonth();
 </script>
 
 <section id="calander__table__wrapper" class="w-full flex justify-between flex-col h-full">

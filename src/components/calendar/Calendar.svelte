@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import CalanderNav from './CalendarNav.svelte';
 	import CalanderTable from './CalendarTable.svelte';
-	import { currentDate, selectedDate } from '$lib';
+	import { currentDate, selectedCalenderDate, userSelectedDate } from '$lib';
 
 	$: today = $currentDate;
 	$: year = today.getFullYear() satisfies number;
@@ -62,8 +62,12 @@
 				month = 11;
 			} else month--;
 		}
-		$selectedDate = new Date(year, month, 1);
+		$selectedCalenderDate = new Date(year, month, 1);
 		createweeks();
+	}
+
+	function dayClicked(day: number) {
+		$userSelectedDate = new Date(year, month, day);
 	}
 
 	onMount(() => {
@@ -71,7 +75,13 @@
 	});
 </script>
 
-<section id="CalanderCard" class="max-h-[400px] card p-4 space-y-2 flex flex-col drop-shadow-lg">
-	<CalanderNav mmyy_Str={$selectedDate} {navigateMonth} />
-	<CalanderTable {today} {weeks} {weekDays} selectedDate={$selectedDate} />
+<section id="CalanderCard" class="max-h-[400px] p-4 space-y-2 flex flex-col drop-shadow-lg">
+	<CalanderNav mmyy_Str={$selectedCalenderDate} {navigateMonth} />
+	<CalanderTable
+		{today}
+		{weeks}
+		{weekDays}
+		selectedCalenderDate={$selectedCalenderDate}
+		{dayClicked}
+	/>
 </section>
