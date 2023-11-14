@@ -2,7 +2,6 @@
 	import '../app.postcss';
 	import { AppShell, AppBar, Avatar, storePopup, LightSwitch } from '@skeletonlabs/skeleton';
 	import { faker } from '@faker-js/faker';
-	import { currentDate, selectedCalenderDate, userSelectedDate } from '$lib';
 
 	// Floating UI for Popups
 	import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
@@ -12,12 +11,9 @@
 	import { invoke } from '@tauri-apps/api/tauri';
 	import { onMount } from 'svelte';
 
-	async function greet() {
-		console.log(await invoke('greet', { name: 'Dylan Smith' }));
-	}
-
 	let time: Date = new Date();
-	$: clockStr = new Intl.DateTimeFormat('en-US', {
+
+	$: clockStr = new Intl.DateTimeFormat(navigator.language, {
 		hour: '2-digit',
 		minute: '2-digit'
 	}).format(time);
@@ -49,7 +45,7 @@
 				<LightSwitch />
 			</li>
 			<li>
-				<button class="drop-shadow-lg" on:click={greet}>
+				<button class="drop-shadow-lg">
 					<Avatar
 						src={faker.image.avatar()}
 						width="w-12"

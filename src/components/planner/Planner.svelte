@@ -1,6 +1,9 @@
 <script lang="ts">
 	import PlannerNav from './PlannerNav.svelte';
 	import { dailyTasks } from '$lib';
+	import type { RhythmTask } from '../../app';
+
+	$: remainingTasks = [] satisfies RhythmTask[];
 </script>
 
 <section class="card h-[800px] overflow-hidden">
@@ -9,7 +12,7 @@
 		<PlannerNav />
 	</hgroup>
 
-	<div class="h-[80%] overflow-hidden">
+	<div class="h-[82%] overflow-hidden">
 		<ul class="flex flex-col gap-4 w-full overflow-y-auto h-full p-4">
 			{#each $dailyTasks as task}
 				<li class="card card-hover cursor-pointer shadow-lg flex variant-soft items-center">
@@ -24,7 +27,7 @@
 		</ul>
 	</div>
 
-	<footer class="h-[10%] w-full bg-surface-300 dark:bg-surface-700 p-4">
-		<p>Total remaining tasks today:</p>
+	<footer class="w-full bg-surface-300 dark:bg-surface-700 p-4 h-full">
+		<p>Total remaining tasks today: {remainingTasks.length}</p>
 	</footer>
 </section>

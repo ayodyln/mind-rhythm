@@ -1,53 +1,48 @@
 import { writable } from 'svelte/store';
+import type { RhythmTask } from '../app';
 
-const dailyTasksDB = [
+const dailyTasksDB: RhythmTask[] = [
 	{
+		id: 'a1b2c3d4-1234-5678-5678-e1f2a3b4c5d6',
 		title: 'Morning Exercise',
 		description: '30 minutes of jogging and stretching',
-		created: '2023-11-13T08:00:00',
-		due: '2023-11-13T08:30:00'
+		created_datetime: '2023-11-13T07:00:00',
+		due_time: '09:00:00'
 	},
 	{
-		title: 'Work on Project X',
-		description: 'Complete tasks for the project',
-		created: '2023-11-13T09:00:00',
-		due: '2023-11-13T12:00:00'
+		id: 'b4c5d6e7-5678-7890-1234-f2a3b4c5d6e7',
+		title: 'Work on Project A',
+		description: 'Complete the coding tasks for Project A',
+		created_datetime: '2023-11-13T09:30:00',
+		due_time: '12:00:00'
 	},
 	{
+		id: 'c5d6e7f8-7890-9012-2345-a3b4c5d6e7f8',
 		title: 'Lunch Break',
-		description: 'Healthy meal and short break',
-		created: '2023-11-13T12:30:00',
-		due: '2023-11-13T13:00:00'
+		description: 'Take a break and have a healthy lunch',
+		created_datetime: '2023-11-13T12:30:00',
+		due_time: '13:30:00'
 	},
 	{
+		id: 'e7f8g9h0-9012-3456-5678-b4c5d6e7f8g9',
 		title: 'Client Meeting',
 		description: 'Discuss project updates with the client',
-		created: '2023-11-13T13:30:00',
-		due: '2023-11-13T15:00:00'
+		created_datetime: '2023-11-13T14:00:00',
+		due_time: '16:00:00'
 	},
 	{
-		title: 'Read',
-		description: 'Read a chapter of the current book',
-		created: '2023-11-13T15:30:00',
-		due: '2023-11-13T16:00:00'
-	},
-	{
+		id: 'g9h0i1j2-3456-7890-1234-d6e7f8g9h0i1',
 		title: 'Dinner',
-		description: 'Healthy dinner preparation',
-		created: '2023-11-13T18:00:00',
-		due: '2023-11-13T18:30:00'
+		description: 'Prepare and have a nutritious dinner',
+		created_datetime: '2023-11-13T18:00:00',
+		due_time: '19:30:00'
 	},
 	{
-		title: 'Relaxation Time',
-		description: 'Watch a movie or listen to music',
-		created: '2023-11-13T19:00:00',
-		due: '2023-11-13T20:30:00'
-	},
-	{
-		title: "Plan Tomorrow's Tasks",
-		description: 'Review and plan tasks for the next day',
-		created: '2023-11-13T21:00:00',
-		due: '2023-11-13T21:30:00'
+		id: 'i1j2k3l4-5678-9012-3456-f8g9h0i1j2k3',
+		title: 'Read a Book',
+		description: 'Relax and read a book before bedtime',
+		created_datetime: '2023-11-13T20:00:00',
+		due_time: '21:30:00'
 	}
 ];
 
