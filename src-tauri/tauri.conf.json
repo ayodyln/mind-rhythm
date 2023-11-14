@@ -56,10 +56,10 @@
     "windows": [
       {
         "fullscreen": false,
-        "height":1000,
+        "height": 600,
         "resizable": true,
-        "title": "mind-rhythm",
-        "width": 1200
+        "title": "Mind Rhythm",
+        "width": 800
       }
     ]
   }

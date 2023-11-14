@@ -4,7 +4,7 @@
 	$: dateStr = $userSelectedDate;
 </script>
 
-<nav>
+<nav class="drop-shadow-lg">
 	<div class="flex card w-fit h-11">
 		<button class="btn">
 			<span>

@@ -1,12 +1,20 @@
 <script lang="ts">
 	import '../app.postcss';
 	import { AppShell, AppBar, Avatar, storePopup, LightSwitch } from '@skeletonlabs/skeleton';
+	import { faker } from '@faker-js/faker';
 
 	// Floating UI for Popups
 	import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
 
 	import Calendar from '../components/calendar/Calendar.svelte';
+	import { invoke } from '@tauri-apps/api/tauri';
+
+	async function greet() {
+		console.log(await invoke('greet', { name: 'Dylan Smith' }));
+	}
+	// 2023-11-14T02:40:40.706Z
+	// $: console.log(new Date()?.toISOString());
 </script>
 
 <AppShell
@@ -16,31 +24,34 @@
 	<svelte:fragment slot="header">
 		<a href="/" class="btn rounded-lg font-bold variant-soft">MindRhythm</a>
 
-		<div class="flex items-center gap-4">
-			<LightSwitch />
-
-			<button class="drop-shadow-lg">
-				<Avatar
-					src="https://images.unsplash.com/photo-1617296538902-887900d9b592?ixid=M3w0Njc5ODF8MHwxfGFsbHx8fHx8fHx8fDE2ODc5NzExMDB8&ixlib=rb-4.0.3&w=128&h=128&auto=format&fit=crop"
-					width="w-12"
-					rounded="rounded-full"
-					border="border-4 border-surface-300-600-token hover:!border-primary-500"
-					cursor="cursor-pointer"
-				/>
-			</button>
-		</div>
+		<ul class="list-nav flex items-center gap-4">
+			<li>
+				<LightSwitch />
+			</li>
+			<li>
+				<button class="drop-shadow-lg" on:click={greet}>
+					<Avatar
+						src={faker.image.avatar()}
+						width="w-12"
+						rounded="rounded-full"
+						border="border-4 border-surface-300-600-token hover:!border-primary-500"
+						cursor="cursor-pointer"
+					/>
+				</button>
+			</li>
+		</ul>
 	</svelte:fragment>
 
 	<!-- <svelte:fragment slot="sidebarLeft" /> -->
 
 	<!-- Router Slot -->
-	<section id="slot__wrapper" class="container p-4 h-full flex">
+	<section id="slot__wrapper" class="container p-4 h-full">
 		<slot />
 	</section>
 	<!-- ---- / ---- -->
 
 	<svelte:fragment slot="sidebarRight">
-		<div class="card">
+		<div class="card variant-soft">
 			<Calendar />
 		</div>
 	</svelte:fragment>
