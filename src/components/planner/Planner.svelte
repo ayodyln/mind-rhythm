@@ -1,9 +1,8 @@
 <script lang="ts">
 	import PlannerNav from './PlannerNav.svelte';
 	import { dailyTasks } from '$lib';
-	import type { RhythmTask } from '../../app';
 
-	$: remainingTasks = [] satisfies RhythmTask[];
+	$: console.log($dailyTasks);
 </script>
 
 <section class="min-h-[650px] max-h-[700px] h-full overflow-hidden flex flex-col p-4">
@@ -19,6 +18,7 @@
 					<p class="font-extrabold text-lg">{task.title}</p>
 					<span class="text-xs">{task.description}</span>
 				</hgroup>
+				<div />
 			</li>
 		{/each}
 	</ul>

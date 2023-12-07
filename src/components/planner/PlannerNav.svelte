@@ -5,7 +5,7 @@
 </script>
 
 <nav class="flex card variant-ghost w-fit items-center">
-	<button class="btn btn-sm rounded-none variant-soft w-1/4">
+	<button class="h-8 rounded-none variant-soft w-11 flex items-center justify-center">
 		<span>
 			<svg xmlns="http://www.w3.org/2000/svg" class="fill-current w-4" viewBox="0 0 448 512">
 				<!--! Font Awesome Pro 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
@@ -24,7 +24,7 @@
 			}).format(dateStr)}
 		</p>
 	</div>
-	<button class="btn btn-sm rounded-none variant-soft w-1/4">
+	<button class="h-8 rounded-none variant-soft w-11 flex items-center justify-center">
 		<span>
 			<svg xmlns="http://www.w3.org/2000/svg" class="fill-current w-4" viewBox="0 0 448 512">
 				<!--! Font Awesome Pro 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->

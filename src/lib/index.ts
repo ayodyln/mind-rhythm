@@ -52,8 +52,4 @@ const userSelectedDate = writable(new Date());
 
 const dailyTasks = writable(dailyTasksDB);
 
-dailyTasks.subscribe((value) => {
-	console.log(value);
-});
-
 export { currentDate, selectedCalenderDate, userSelectedDate, dailyTasks };
