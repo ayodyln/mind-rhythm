@@ -2,7 +2,6 @@
 	import '../app.postcss';
 	import { AppShell, AppBar, Avatar, storePopup, LightSwitch } from '@skeletonlabs/skeleton';
 	import { faker } from '@faker-js/faker';
-	import { currentDate, selectedCalenderDate, userSelectedDate } from '$lib';
 
 	// Floating UI for Popups
 	import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
@@ -12,12 +11,9 @@
 	import { invoke } from '@tauri-apps/api/tauri';
 	import { onMount } from 'svelte';
 
-	async function greet() {
-		console.log(await invoke('greet', { name: 'Dylan Smith' }));
-	}
-
 	let time: Date = new Date();
-	$: clockStr = new Intl.DateTimeFormat('en-US', {
+
+	$: clockStr = new Intl.DateTimeFormat(navigator.language, {
 		hour: '2-digit',
 		minute: '2-digit'
 	}).format(time);
@@ -34,6 +30,7 @@
 </script>
 
 <AppShell
+	class="h-screen"
 	slotHeader="flex items-center justify-between p-4 py-2 card rounded-none"
 	slotSidebarRight="w-fit max-w-sm rounded-none px-4 py-2 my-2 border-l-2 border-surface-500/50"
 >
@@ -49,7 +46,7 @@
 				<LightSwitch />
 			</li>
 			<li>
-				<button class="drop-shadow-lg" on:click={greet}>
+				<button class="drop-shadow-lg">
 					<Avatar
 						src={faker.image.avatar()}
 						width="w-12"
@@ -65,7 +62,7 @@
 	<!-- <svelte:fragment slot="sidebarLeft" /> -->
 
 	<!-- Router Slot -->
-	<section id="slot__wrapper" class="container p-4 h-full">
+	<section id="slot__wrapper">
 		<slot />
 	</section>
 	<!-- ---- / ---- -->

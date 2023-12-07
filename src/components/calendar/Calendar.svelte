@@ -9,7 +9,7 @@
 	$: month = today.getMonth() satisfies number;
 
 	let weeks: (string | number)[][] = [];
-	const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+	const weekDays = ['Sun', 'Mon', 'Tues', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 	function createweeks() {
 		/* 

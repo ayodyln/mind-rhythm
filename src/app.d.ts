@@ -7,3 +7,13 @@ declare namespace App {
 	// interface Error {}
 	// interface Platform {}
 }
+
+type RhythmTask = {
+	id: string;
+	title: string;
+	description: string;
+	created_datetime: string;
+	due_time: string;
+};
+
+export { RhythmTask };
