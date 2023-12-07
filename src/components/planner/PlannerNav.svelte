@@ -4,9 +4,9 @@
 	$: dateStr = $userSelectedDate;
 </script>
 
-<nav class="drop-shadow-lg">
-	<div class="flex card w-fit h-11">
-		<button class="btn">
+<nav class="">
+	<div class="flex card variant-ghost w-fit items-center">
+		<button class="btn btn-sm rounded-none variant-soft w-1/4">
 			<span>
 				<svg xmlns="http://www.w3.org/2000/svg" class="fill-current w-4" viewBox="0 0 448 512">
 					<!--! Font Awesome Pro 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
@@ -16,8 +16,7 @@
 				</svg>
 			</span>
 		</button>
-		<div class="w-32 flex items-center h-full">
-			<div class="bg-surface-500/50 h-full w-0.5" />
+		<div class="flex items-center h-full w-32">
 			<p class="text-xs font-medium w-full text-center">
 				{new Intl.DateTimeFormat('en-US', {
 					day: 'numeric',
@@ -25,9 +24,8 @@
 					year: 'numeric'
 				}).format(dateStr)}
 			</p>
-			<div class="bg-surface-500/50 h-full w-0.5" />
 		</div>
-		<button class="btn">
+		<button class="btn btn-sm rounded-none variant-soft w-1/4">
 			<span>
 				<svg xmlns="http://www.w3.org/2000/svg" class="fill-current w-4" viewBox="0 0 448 512">
 					<!--! Font Awesome Pro 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->

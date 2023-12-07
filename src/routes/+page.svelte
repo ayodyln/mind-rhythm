@@ -2,6 +2,6 @@
 	import Planner from '../components/planner/Planner.svelte';
 </script>
 
-<section id="dashboard" class="p-4">
+<section id="dashboard">
 	<Planner />
 </section>
