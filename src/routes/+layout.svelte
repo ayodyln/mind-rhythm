@@ -10,6 +10,7 @@
 	import Calendar from '../components/calendar/Calendar.svelte';
 	import { invoke } from '@tauri-apps/api/tauri';
 	import { onMount } from 'svelte';
+	import { page } from '$app/stores';
 
 	let time: Date = new Date();
 
@@ -35,7 +36,20 @@
 	slotSidebarRight="w-fit max-w-sm rounded-none px-4 py-2 my-2 border-l-2 border-surface-500/50"
 >
 	<svelte:fragment slot="header">
-		<a href="/" class="btn rounded-lg font-bold variant-soft">MindRhythm</a>
+		<ul class="flex items-center gap-4">
+			<li>
+				<a href="/" class="btn rounded-lg variant-ghost font-black">MindRhythm</a>
+			</li>
+			<li>
+				<a
+					href="/tracker"
+					class="btn rounded-lg"
+					class:variant-soft={$page.route.id === '/tracker'}
+				>
+					Tracker
+				</a>
+			</li>
+		</ul>
 
 		<div>
 			<span>{clockStr}</span>
@@ -68,7 +82,7 @@
 	<!-- ---- / ---- -->
 
 	<svelte:fragment slot="sidebarRight">
-		<div class="card variant-soft">
+		<div class="card">
 			<Calendar />
 		</div>
 	</svelte:fragment>
