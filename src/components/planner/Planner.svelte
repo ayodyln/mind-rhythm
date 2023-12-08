@@ -1,6 +1,7 @@
 <script lang="ts">
 	import PlannerNav from './PlannerNav.svelte';
 	import { dailyTasks } from '$lib';
+	import PlannedItem from './PlannedItem.svelte';
 
 	$: console.log($dailyTasks);
 </script>
@@ -13,13 +14,7 @@
 
 	<ul class="flex flex-col gap-4 w-full overflow-y-auto h-full">
 		{#each $dailyTasks as task}
-			<li class="card p-4">
-				<hgroup>
-					<p class="font-extrabold text-lg">{task.title}</p>
-					<span class="text-xs">{task.description}</span>
-				</hgroup>
-				<div />
-			</li>
+			<PlannedItem {task} />
 		{/each}
 	</ul>
 </section>
