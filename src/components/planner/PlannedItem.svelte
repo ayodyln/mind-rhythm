@@ -6,10 +6,7 @@
 
 	export let task: RhythmTask;
 
-	$: id = task.id;
-	$: currTaskID = $currentEditTask ? $currentEditTask.id : '';
 	let timeInput = task.due_time;
-	let editState = false;
 
 	const popupHover: PopupSettings = {
 		event: 'hover',
@@ -19,12 +16,10 @@
 
 	function enableEditState() {
 		$currentEditTask = task;
-		editState = true;
 	}
 
 	function saveHndlr() {
 		$currentEditTask = undefined;
-		editState = false;
 	}
 
 	function formatTimeString() {
@@ -47,7 +42,7 @@
 
 <li class="card p-4 flex justify-between gap-8">
 	<hgroup class="flex flex-col w-full">
-		{#if !editState && id !== currTaskID}
+		{#if task.id !== $currentEditTask?.id}
 			<button
 				on:dblclick={enableEditState}
 				use:popup={popupHover}
@@ -66,7 +61,7 @@
 		{/if}
 	</hgroup>
 	<div class="flex items-center gap-4">
-		{#if !editState}
+		{#if task.id !== $currentEditTask?.id}
 			<button
 				on:dblclick={enableEditState}
 				use:popup={popupHover}
@@ -87,7 +82,7 @@
 		{/if}
 		<button
 			class="btn rounded-lg disabled:variant-soft variant-soft-success btn-sm disabled:opacity-20"
-			disabled={!editState}
+			disabled={$currentEditTask?.id !== task.id}
 			on:click={saveHndlr}
 		>
 			Save
