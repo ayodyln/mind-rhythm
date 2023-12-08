@@ -2,9 +2,12 @@
 	import { popup } from '@skeletonlabs/skeleton';
 	import type { PopupSettings } from '@skeletonlabs/skeleton';
 	import type { RhythmTask } from '../../app';
+	import { currentEditTask } from '$lib';
 
 	export let task: RhythmTask;
 
+	$: id = task.id;
+	$: currTaskID = $currentEditTask ? $currentEditTask.id : '';
 	let timeInput = task.due_time;
 	let editState = false;
 
@@ -14,17 +17,21 @@
 		placement: 'top'
 	};
 
-	const toggleEditState = () => (editState = !editState);
+	function enableEditState() {
+		$currentEditTask = task;
+		editState = true;
+	}
+
 	function saveHndlr() {
-		editState = !editState;
+		$currentEditTask = undefined;
+		editState = false;
 	}
 
 	function formatTimeString() {
-		const [h, m, ms] = task.due_time.split(':');
+		const [h, m] = task.due_time.split(':');
 		const date = new Date();
 		date.setHours(+h);
 		date.setMinutes(+m);
-		date.setMilliseconds(+ms);
 		return date.toLocaleString('en-US', {
 			hour: 'numeric',
 			minute: 'numeric',
@@ -40,9 +47,9 @@
 
 <li class="card p-4 flex justify-between gap-8">
 	<hgroup class="flex flex-col w-full">
-		{#if !editState}
+		{#if !editState && id !== currTaskID}
 			<button
-				on:dblclick={toggleEditState}
+				on:dblclick={enableEditState}
 				use:popup={popupHover}
 				class="font-extrabold text-lg text-start hover:underline w-fit">{task.title}</button
 			>
@@ -61,7 +68,7 @@
 	<div class="flex items-center gap-4">
 		{#if !editState}
 			<button
-				on:dblclick={toggleEditState}
+				on:dblclick={enableEditState}
 				use:popup={popupHover}
 				class="w-24 btn btn-sm rounded-lg variant-ghost"
 			>

@@ -1,4 +1,4 @@
-import { writable } from 'svelte/store';
+import { writable, type Writable } from 'svelte/store';
 import type { RhythmTask } from '../app';
 
 const dailyTasksDB: RhythmTask[] = [
@@ -52,4 +52,10 @@ const userSelectedDate = writable(new Date());
 
 const dailyTasks = writable(dailyTasksDB);
 
-export { currentDate, selectedCalenderDate, userSelectedDate, dailyTasks };
+const currentEditTask: Writable<RhythmTask | undefined> = writable();
+
+currentEditTask.subscribe((value) => {
+	console.log('currentEditTask', value);
+});
+
+export { currentDate, selectedCalenderDate, userSelectedDate, dailyTasks, currentEditTask };
