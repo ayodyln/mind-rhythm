@@ -7,9 +7,8 @@
 </script>
 
 <section class="min-h-[650px] max-h-[700px] h-full overflow-hidden flex flex-col p-4">
-	<hgroup class="p-4 card flex justify-between items-center h-[10%] mb-4 drop-shadow-lg">
-		<h3 class="h3">Rhythm Tasks</h3>
-		<PlannerNav />
+	<hgroup class="flex justify-between items-center h-[10%] mb-4 drop-shadow-lg">
+		<p class="h2 font-black">Rhythm Tasks</p>
 	</hgroup>
 
 	<ul class="flex flex-col gap-4 w-full overflow-y-auto h-full">

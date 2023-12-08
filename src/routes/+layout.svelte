@@ -15,14 +15,15 @@
 	let time: Date = new Date();
 
 	$: clockStr = new Intl.DateTimeFormat(navigator.language, {
-		hour: '2-digit',
-		minute: '2-digit'
+		hour: 'numeric',
+		minute: '2-digit',
+		second: '2-digit'
 	}).format(time);
 
 	onMount(() => {
 		const interval = setInterval(() => {
 			time = new Date();
-		}, 1000);
+		}, 500);
 
 		return () => {
 			clearInterval(interval);
@@ -32,7 +33,7 @@
 
 <AppShell
 	class="h-screen"
-	slotHeader="flex items-center justify-between p-4 py-2 card rounded-none"
+	slotHeader="flex items-center justify-between p-4 py-2 card rounded-none variant-glass"
 	slotSidebarRight="w-fit max-w-sm rounded-none px-4 py-2 my-2 border-l-2 border-surface-500/50"
 >
 	<svelte:fragment slot="header">
@@ -52,7 +53,7 @@
 		</ul>
 
 		<div>
-			<span>{clockStr}</span>
+			<span class="font-mono">{clockStr}</span>
 		</div>
 
 		<ul class="list-nav flex items-center gap-4">
