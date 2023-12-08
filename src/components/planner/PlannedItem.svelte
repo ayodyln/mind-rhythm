@@ -35,11 +35,6 @@
 	}
 </script>
 
-<div class="card p-4 drop-shadow-lg variant-filled" data-popup={task.id}>
-	<p>Double click to edit.</p>
-	<div class="arrow variant-filled" />
-</div>
-
 <li class="card p-4 flex justify-between gap-8">
 	<hgroup class="flex flex-col w-full">
 		{#if task.id !== $currentEditTask?.id}
@@ -49,6 +44,10 @@
 				class="font-extrabold text-lg text-start hover:underline w-fit">{task.title}</button
 			>
 			<span class="text-xs">{task.description}</span>
+			<div class="card p-4 drop-shadow-lg variant-filled" data-popup={task.id}>
+				<p>Double click to edit.</p>
+				<div class="arrow variant-filled" />
+			</div>
 		{:else}
 			<input type="text" class="input btn-sm rounded-lg mb-2" placeholder={task.title} />
 			<textarea
@@ -69,6 +68,10 @@
 			>
 				{formatTimeString()}
 			</button>
+			<div class="card p-4 drop-shadow-lg variant-filled" data-popup={task.id}>
+				<p>Double click to edit.</p>
+				<div class="arrow variant-filled" />
+			</div>
 		{:else}
 			<label for="due_time">
 				<input
