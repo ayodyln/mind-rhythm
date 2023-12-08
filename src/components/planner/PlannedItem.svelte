@@ -6,11 +6,11 @@
 	export let task: RhythmTask;
 
 	let timeInput = task.due_time;
-	let editState = !false;
+	let editState = false;
 
 	const popupHover: PopupSettings = {
 		event: 'hover',
-		target: 'popupHover',
+		target: task.id,
 		placement: 'top'
 	};
 
@@ -18,9 +18,22 @@
 	function saveHndlr() {
 		editState = !editState;
 	}
+
+	function formatTimeString() {
+		const [h, m, ms] = task.due_time.split(':');
+		const date = new Date();
+		date.setHours(+h);
+		date.setMinutes(+m);
+		date.setMilliseconds(+ms);
+		return date.toLocaleString('en-US', {
+			hour: 'numeric',
+			minute: 'numeric',
+			hour12: true
+		});
+	}
 </script>
 
-<div class="card p-4 drop-shadow-lg variant-filled" data-popup="popupHover">
+<div class="card p-4 drop-shadow-lg variant-filled" data-popup={task.id}>
 	<p>Double click to edit.</p>
 	<div class="arrow variant-filled" />
 </div>
@@ -31,7 +44,7 @@
 			<button
 				on:dblclick={toggleEditState}
 				use:popup={popupHover}
-				class="font-extrabold text-lg text-start hover:underline">{task.title}</button
+				class="font-extrabold text-lg text-start hover:underline w-fit">{task.title}</button
 			>
 			<span class="text-xs">{task.description}</span>
 		{:else}
@@ -46,15 +59,25 @@
 		{/if}
 	</hgroup>
 	<div class="flex items-center gap-4">
-		<label for="due_time">
-			<input
-				bind:value={timeInput}
-				type="time"
-				name="due_time"
-				id={task.id}
-				class="input rounded-lg cursor-pointer btn-sm"
-			/>
-		</label>
+		{#if !editState}
+			<button
+				on:dblclick={toggleEditState}
+				use:popup={popupHover}
+				class="w-24 btn btn-sm rounded-lg variant-ghost"
+			>
+				{formatTimeString()}
+			</button>
+		{:else}
+			<label for="due_time">
+				<input
+					bind:value={timeInput}
+					type="time"
+					name="due_time"
+					id={task.id}
+					class="input rounded-lg cursor-pointer btn-sm"
+				/>
+			</label>
+		{/if}
 		<button
 			class="btn rounded-lg disabled:variant-soft variant-soft-success btn-sm disabled:opacity-20"
 			disabled={!editState}
