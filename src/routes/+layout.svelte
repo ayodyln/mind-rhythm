@@ -1,16 +1,15 @@
 <script lang="ts">
 	import '../app.postcss';
-	import { AppShell, AppBar, Avatar, storePopup, LightSwitch } from '@skeletonlabs/skeleton';
-	import { faker } from '@faker-js/faker';
-
-	// Floating UI for Popups
-	import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
-	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
-
-	import Calendar from '../components/calendar/Calendar.svelte';
 	import { invoke } from '@tauri-apps/api/tauri';
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
+	import { AppShell, Avatar, storePopup, LightSwitch } from '@skeletonlabs/skeleton';
+	import Calendar from '../components/calendar/Calendar.svelte';
+	import { faker } from '@faker-js/faker';
+	import { clock } from '$lib';
+	// Floating UI for Popups
+	import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
+	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
 
 	let time: Date = new Date();
 
@@ -53,7 +52,8 @@
 		</ul>
 
 		<div>
-			<span class="font-mono">{clockStr}</span>
+			<!-- <span class="font-mono">{clockStr}</span> -->
+			<span class="font-mono">{$clock}</span>
 		</div>
 
 		<ul class="list-nav flex items-center gap-4">

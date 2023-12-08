@@ -49,13 +49,26 @@ const dailyTasksDB: RhythmTask[] = [
 const currentDate = writable(new Date());
 const selectedCalenderDate = writable(new Date());
 const userSelectedDate = writable(new Date());
-
 const dailyTasks = writable(dailyTasksDB);
-
 const currentEditTask: Writable<RhythmTask | undefined> = writable();
+
+const clock = writable(getTime());
+
+function getTime(): string {
+	return new Intl.DateTimeFormat(navigator.language, {
+		hour: 'numeric',
+		minute: 'numeric',
+		second: 'numeric',
+		hour12: true
+	}).format(new Date());
+}
+
+export const clockInterval = setInterval(() => {
+	clock.set(getTime());
+}, 1000);
 
 currentEditTask.subscribe((value) => {
 	console.log('currentEditTask', value);
 });
 
-export { currentDate, selectedCalenderDate, userSelectedDate, dailyTasks, currentEditTask };
+export { currentDate, selectedCalenderDate, userSelectedDate, dailyTasks, currentEditTask, clock };

@@ -82,13 +82,16 @@
 					class="input rounded-lg cursor-pointer btn-sm"
 				/>
 			</label>
-			<button
-				class="btn rounded-lg disabled:variant-soft variant-soft-success btn-sm disabled:opacity-20"
-				disabled={$currentEditTask?.id !== task.id}
-				on:click={saveHndlr}
-			>
-				Save
-			</button>
+			<div class="flex flex-col">
+				<button
+					class="btn rounded-lg variant-soft-success btn-sm rounded-b-none"
+					disabled={$currentEditTask?.id !== task.id}
+					on:click={saveHndlr}
+				>
+					Save
+				</button>
+				<button class="btn rounded-lg btn-sm variant-soft-error rounded-t-none"> Delete </button>
+			</div>
 		{/if}
 	</div>
 </li>
