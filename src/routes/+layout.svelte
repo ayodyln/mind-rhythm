@@ -82,11 +82,11 @@
 	</section>
 	<!-- ---- / ---- -->
 
-	<svelte:fragment slot="sidebarRight">
+	<!-- <svelte:fragment slot="sidebarRight">
 		<div class="card">
 			<Calendar />
 		</div>
-	</svelte:fragment>
+	</svelte:fragment> -->
 
 	<!-- <svelte:fragment slot="pageFooter">Page Footer</svelte:fragment> -->
 	<!-- <svelte:fragment slot="footer">Footer</svelte:fragment> -->

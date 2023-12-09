@@ -2,11 +2,15 @@
 	import { popup } from '@skeletonlabs/skeleton';
 	import type { PopupSettings } from '@skeletonlabs/skeleton';
 	import type { RhythmTask } from '../../app';
-	import { currentEditTask } from '$lib';
+	import { currentEditTask, dailyTasksDB } from '$lib';
 
 	export let task: RhythmTask;
 
-	let timeInput = task.due_time;
+	let ID = task.id || '';
+	let title: string = task.title;
+	let description: string = task.description;
+	let startTimeInput: string = task.start_time;
+	let dueTimeInput: string = task.due_time;
 
 	const popupHover: PopupSettings = {
 		event: 'hover',
@@ -18,12 +22,27 @@
 		$currentEditTask = task;
 	}
 
-	function saveHndlr() {
+	function saveHndlr(): void {
+		const t: RhythmTask | undefined = dailyTasksDB.find((t) => t.id === ID);
+
+		if (t?.title !== title) {
+			console.log(t);
+		}
+		if (t?.description !== description) {
+			console.log(t);
+		}
+		if (t?.start_time !== startTimeInput) {
+			console.log(t);
+		}
+		if (t?.due_time !== dueTimeInput) {
+			console.log(t);
+		}
+
 		$currentEditTask = undefined;
 	}
 
-	function formatTimeString() {
-		const [h, m] = task.due_time.split(':');
+	function formatTimeString(timeStr: string): string {
+		const [h, m] = timeStr.split(':');
 		const date = new Date();
 		date.setHours(+h);
 		date.setMinutes(+m);
@@ -49,9 +68,15 @@
 				<div class="arrow variant-filled" />
 			</div>
 		{:else}
-			<input type="text" class="input btn-sm rounded-lg mb-2" placeholder={task.title} />
+			<input
+				type="text"
+				bind:value={title}
+				class="input btn-sm rounded-lg mb-2"
+				placeholder={task.title}
+			/>
 			<textarea
 				name="description"
+				bind:value={description}
 				id="description_textarea"
 				placeholder={task.description}
 				class="textarea resize-none btn-sm rounded-lg text-xs"
@@ -64,34 +89,50 @@
 			<button
 				on:dblclick={enableEditState}
 				use:popup={popupHover}
-				class="w-24 btn btn-sm rounded-lg variant-ghost"
+				class="w-40 btn btn-sm rounded-lg variant-ghost"
 			>
-				{formatTimeString()}
+				{formatTimeString(task.start_time)} - {formatTimeString(task.due_time)}
 			</button>
 			<div class="card p-4 drop-shadow-lg variant-filled" data-popup={task.id}>
 				<p>Double click to edit.</p>
 				<div class="arrow variant-filled" />
 			</div>
 		{:else}
-			<label for="due_time">
-				<input
-					bind:value={timeInput}
-					type="time"
-					name="due_time"
-					id={task.id}
-					class="input rounded-lg cursor-pointer btn-sm"
-				/>
-			</label>
-			<div class="flex flex-col">
-				<button
-					class="btn rounded-lg variant-soft-success btn-sm rounded-b-none"
-					disabled={$currentEditTask?.id !== task.id}
-					on:click={saveHndlr}
-				>
-					Save
-				</button>
-				<button class="btn rounded-lg btn-sm variant-soft-error rounded-t-none"> Delete </button>
-			</div>
+			<section class="flex flex-col gap-2">
+				<div class="flex gap-2">
+					<label for="start_time">
+						<input
+							bind:value={startTimeInput}
+							type="time"
+							name="start_time"
+							id={`start_time-${task.id}`}
+							class="input rounded-lg cursor-pointer btn-sm"
+						/>
+					</label>
+					<label for="due_time">
+						<input
+							bind:value={dueTimeInput}
+							type="time"
+							name="due_time"
+							id={`due_time-${task.id}`}
+							class="input rounded-lg cursor-pointer btn-sm"
+						/>
+					</label>
+				</div>
+
+				<div class="flex">
+					<button
+						class="btn rounded-lg variant-soft-success btn-sm rounded-r-none w-1/2"
+						disabled={$currentEditTask?.id !== task.id}
+						on:click={saveHndlr}
+					>
+						Save
+					</button>
+					<button class="btn rounded-lg btn-sm variant-soft-error rounded-l-none w-1/2">
+						Delete
+					</button>
+				</div>
+			</section>
 		{/if}
 	</div>
 </li>

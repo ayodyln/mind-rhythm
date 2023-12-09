@@ -13,6 +13,7 @@ type RhythmTask = {
 	title: string;
 	description: string;
 	created_datetime: string;
+	start_time: string;
 	due_time: string;
 };
 
