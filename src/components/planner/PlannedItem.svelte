@@ -19,32 +19,32 @@
 	let startTimeInput: string = task.start_time;
 	let dueTimeInput: string = task.due_time;
 
-	$: taskState = getTastTimeState($clock);
-	function getTastTimeState(clock: string): TaskState {
+	$: taskState = getTaskTime($clock);
+
+	function getTaskTime(clock: string): TaskState | undefined {
 		const currTime = generateMemoDateTime(clock);
 		const startTime = generateMemoDateTime(task.start_time);
 		const endTime = generateMemoDateTime(task.due_time);
 
-		// If in the past
 		if (currTime.getTime() >= startTime.getTime() && currTime.getTime() <= endTime.getTime()) {
 			return TaskState.Current;
 		}
 
-		if (currTime.getTime() > startTime.getTime()) {
-			return TaskState.Past;
+		// debug
+		if (task.title === `Lunch Break`) {
+			// console.log(currTime.getHours());
+			console.log(currTime);
+			// console.log(startTime.getHours());
+			// console.log(endTime.getHours());
 		}
 
-		if (currTime.getTime() < endTime.getTime()) {
-			return TaskState.Future;
-		}
-
-		return TaskState.Undefined;
+		return;
 	}
 
 	function generateMemoDateTime(timeStr: string): Date {
 		const [h, m, s] = timeStr.match(/[^:\s]+/g) || ([] as string[]);
 		const date = new Date();
-		date.setHours(+h);
+		date.setHours(+h > 9 ? +h : parseInt(h) + 12);
 		date.setMinutes(+m);
 		date.setSeconds(+s);
 		return date;
@@ -103,14 +103,15 @@
 	}
 </script>
 
+<!-- class:opacity-50={taskState === TaskState.Past}
+class:variant-filled-primary={taskState === TaskState.Current}
+class:variant-soft={taskState === TaskState.Future} -->
 <li
 	class="card p-4 flex justify-between gap-8"
-	class:opacity-50={taskState === TaskState.Past}
 	class:variant-filled-primary={taskState === TaskState.Current}
-	class:variant-soft-primary={taskState === TaskState.Future}
 >
 	<hgroup class="flex flex-col w-full">
-		{#if task.id !== $currentEditTask?.id}
+		{#if ID !== $currentEditTask?.id}
 			<button
 				on:dblclick={enableEditState}
 				use:popup={popupHover}
@@ -139,7 +140,7 @@
 		{/if}
 	</hgroup>
 	<div class="flex items-center gap-4">
-		{#if task.id !== $currentEditTask?.id}
+		{#if ID !== $currentEditTask?.id}
 			<button
 				on:dblclick={enableEditState}
 				use:popup={popupHover}
