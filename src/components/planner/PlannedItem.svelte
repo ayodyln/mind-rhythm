@@ -1,10 +1,8 @@
 <script lang="ts">
-	import { filter, popup } from '@skeletonlabs/skeleton';
+	import { popup } from '@skeletonlabs/skeleton';
 	import type { PopupSettings } from '@skeletonlabs/skeleton';
 	import type { RhythmTask } from '../../app';
 	import { currentEditTask, dailyTasks } from '$lib';
-	import type { Writable } from 'svelte/store';
-	import type { as } from 'vitest/dist/reporters-5f784f42';
 
 	export let task: RhythmTask;
 
@@ -32,15 +30,8 @@
 		if (task.description !== description) memo.set('description', description);
 		if (task.start_time !== startTimeInput) memo.set('start_time', startTimeInput);
 		if (task.due_time !== dueTimeInput) memo.set('due_time', dueTimeInput);
-
 		$currentEditTask = undefined;
-
-		if (memo.size === 1) {
-			console.warn('No New Updates...');
-			return;
-		}
-
-		// Feedback
+		if (memo.size === 1) return;
 		dailyTaskStoreUpdater(memo);
 	}
 

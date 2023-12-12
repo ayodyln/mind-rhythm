@@ -64,7 +64,7 @@ const userSelectedDate = writable(new Date());
 const dailyTasks = writable(dailyTasksDB);
 
 dailyTasks.subscribe((value) => {
-	console.log(value);
+	console.log('New Task Array', value);
 });
 
 const currentEditTask: Writable<RhythmTask | undefined> = writable();
