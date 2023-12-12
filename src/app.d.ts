@@ -15,6 +15,7 @@ type RhythmTask = {
 	created_datetime: string;
 	start_time: string;
 	due_time: string;
+	pos: number;
 };
 
 export { RhythmTask };

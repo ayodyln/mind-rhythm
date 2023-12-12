@@ -1,9 +1,6 @@
 <script lang="ts">
-	import PlannerNav from './PlannerNav.svelte';
 	import { dailyTasks } from '$lib';
 	import PlannedItem from './PlannedItem.svelte';
-
-	$: console.log($dailyTasks);
 </script>
 
 <section class="min-h-[650px] max-h-[700px] h-full overflow-hidden flex flex-col p-4">

@@ -1,8 +1,10 @@
 <script lang="ts">
-	import { popup } from '@skeletonlabs/skeleton';
+	import { filter, popup } from '@skeletonlabs/skeleton';
 	import type { PopupSettings } from '@skeletonlabs/skeleton';
 	import type { RhythmTask } from '../../app';
-	import { currentEditTask, dailyTasksDB } from '$lib';
+	import { currentEditTask, dailyTasks } from '$lib';
+	import type { Writable } from 'svelte/store';
+	import type { as } from 'vitest/dist/reporters-5f784f42';
 
 	export let task: RhythmTask;
 
@@ -23,22 +25,40 @@
 	}
 
 	function saveHndlr(): void {
-		const t: RhythmTask | undefined = dailyTasksDB.find((t) => t.id === ID);
-
-		if (t?.title !== title) {
-			console.log(t);
-		}
-		if (t?.description !== description) {
-			console.log(t);
-		}
-		if (t?.start_time !== startTimeInput) {
-			console.log(t);
-		}
-		if (t?.due_time !== dueTimeInput) {
-			console.log(t);
-		}
+		const task: RhythmTask = $dailyTasks.find((t: RhythmTask) => t.id === ID) || ({} as RhythmTask);
+		const memo = new Map();
+		memo.set('id', task.id);
+		if (task.title !== title) memo.set('title', title);
+		if (task.description !== description) memo.set('description', description);
+		if (task.start_time !== startTimeInput) memo.set('start_time', startTimeInput);
+		if (task.due_time !== dueTimeInput) memo.set('due_time', dueTimeInput);
 
 		$currentEditTask = undefined;
+
+		if (memo.size === 1) {
+			console.warn('No New Updates...');
+			return;
+		}
+
+		// Feedback
+		dailyTaskStoreUpdater(memo);
+	}
+
+	function dailyTaskStoreUpdater(data: Map<string, string>) {
+		const task = { ...$dailyTasks.find((task) => task.id === data.get('id')) } as any;
+		for (const [key, val] of data.entries()) {
+			if (key === 'id') continue;
+			task[key] = data.get(key);
+		}
+		$dailyTasks = sortDailyTasks([...$dailyTasks.filter((t) => t.id !== task.id), task]);
+	}
+
+	function sortDailyTasks(array: RhythmTask[]) {
+		return array.sort((a, b) => {
+			if (a.pos < b.pos) return -1;
+			if (a.pos > b.pos) return 1;
+			return 0;
+		});
 	}
 
 	function formatTimeString(timeStr: string): string {
