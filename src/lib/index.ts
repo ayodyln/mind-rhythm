@@ -16,7 +16,7 @@ const dailyTasksDB: RhythmTask[] = [
 		title: 'Work on Project A',
 		description: 'Complete the coding tasks for Project A',
 		created_datetime: '2023-11-13T09:30:00',
-		start_time: '11:00:00',
+		start_time: '10:30:00',
 		due_time: '12:00:00',
 		pos: 2
 	},
@@ -25,8 +25,8 @@ const dailyTasksDB: RhythmTask[] = [
 		title: 'Lunch Break',
 		description: 'Take a break and have a healthy lunch',
 		created_datetime: '2023-11-13T12:30:00',
-		start_time: '12:15:00',
-		due_time: '01:00:00',
+		start_time: '13:15:00',
+		due_time: '14:00:00',
 		pos: 3
 	},
 	{
@@ -53,7 +53,7 @@ const dailyTasksDB: RhythmTask[] = [
 		description: 'Relax and read a book before bedtime',
 		created_datetime: '2023-11-13T20:00:00',
 		start_time: '21:00:00',
-		due_time: '21:30:00',
+		due_time: '23:59:59',
 		pos: 6
 	}
 ];
