@@ -18,4 +18,4 @@ type RhythmTask = {
 	pos: number;
 };
 
-export { RhythmTask };
+export { RhythmTask, TaskState };

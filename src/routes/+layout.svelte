@@ -1,6 +1,5 @@
 <script lang="ts">
 	import '../app.postcss';
-	import { invoke } from '@tauri-apps/api/tauri';
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import { AppShell, Avatar, storePopup, LightSwitch } from '@skeletonlabs/skeleton';

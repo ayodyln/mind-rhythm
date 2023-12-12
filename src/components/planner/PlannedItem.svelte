@@ -2,8 +2,15 @@
 	import { popup } from '@skeletonlabs/skeleton';
 	import type { PopupSettings } from '@skeletonlabs/skeleton';
 	import type { RhythmTask } from '../../app';
-	import { currentEditTask, dailyTasks } from '$lib';
+	import { currentEditTask, dailyTasks, clock } from '$lib';
+	import { onMount } from 'svelte';
 
+	enum TaskState {
+		Past,
+		Current,
+		Future,
+		Undefined
+	}
 	export let task: RhythmTask;
 
 	let ID = task.id || '';
@@ -11,6 +18,32 @@
 	let description: string = task.description;
 	let startTimeInput: string = task.start_time;
 	let dueTimeInput: string = task.due_time;
+
+	$: taskState = TaskState.Undefined;
+
+	function getTastTimeState(clock: string): TaskState {
+		const currTime = generateMemoDateTime(clock).getTime();
+		const startTime = generateMemoDateTime(task.start_time).getTime();
+		const endTime = generateMemoDateTime(task.due_time).getTime();
+		if (currTime > startTime) {
+			console.log(task.title, 'under start');
+		}
+
+		return TaskState.Undefined;
+	}
+
+	onMount(() => {
+		getTastTimeState($clock);
+	});
+
+	function generateMemoDateTime(timeStr: string): Date {
+		const [h, m, s] = timeStr.match(/[^:\s]+/g) || ([] as string[]);
+		const date = new Date();
+		date.setHours(+h);
+		date.setMinutes(+m);
+		date.setSeconds(+s);
+		return date;
+	}
 
 	const popupHover: PopupSettings = {
 		event: 'hover',
@@ -65,7 +98,11 @@
 	}
 </script>
 
-<li class="card p-4 flex justify-between gap-8">
+<li
+	class="card p-4 flex justify-between gap-8"
+	class:opacity-75={taskState === TaskState.Past}
+	class:variant-filled-primary={taskState === TaskState.Current}
+>
 	<hgroup class="flex flex-col w-full">
 		{#if task.id !== $currentEditTask?.id}
 			<button
