@@ -39,15 +39,6 @@
 			<li>
 				<a href="/" class="btn rounded-lg variant-ghost font-black">MindRhythm</a>
 			</li>
-			<li>
-				<a
-					href="/tracker"
-					class="btn rounded-lg"
-					class:variant-soft={$page.route.id === '/tracker'}
-				>
-					Tracker
-				</a>
-			</li>
 		</ul>
 
 		<div>
