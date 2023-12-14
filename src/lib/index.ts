@@ -34,8 +34,8 @@ const dailyTasksDB: RhythmTask[] = [
 		title: 'Client Meeting',
 		description: 'Discuss project updates with the client',
 		created_datetime: '2023-11-13T14:00:00',
-		start_time: '16:30:00',
-		due_time: '17:45:00',
+		start_time: '16:00:00',
+		due_time: '16:15:00',
 		pos: 4
 	},
 	{
@@ -43,7 +43,7 @@ const dailyTasksDB: RhythmTask[] = [
 		title: 'Project B',
 		description: 'Prepare and have a nutritious dinner',
 		created_datetime: '2023-11-13T18:00:00',
-		start_time: '18:40:00',
+		start_time: '16:16:00',
 		due_time: '19:30:00',
 		pos: 5
 	},
@@ -72,7 +72,7 @@ const currentEditTask: Writable<RhythmTask | undefined> = writable();
 const clock = writable(getTime());
 
 function getTime(): string {
-	return new Intl.DateTimeFormat(navigator.language, {
+	return new Intl.DateTimeFormat('en-US', {
 		hour: 'numeric',
 		minute: 'numeric',
 		second: 'numeric',

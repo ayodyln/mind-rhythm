@@ -12,7 +12,7 @@
 
 	let time: Date = new Date();
 
-	$: clockStr = new Intl.DateTimeFormat(navigator.language, {
+	$: clockStr = new Intl.DateTimeFormat('en-US', {
 		hour: 'numeric',
 		minute: '2-digit',
 		second: '2-digit'
