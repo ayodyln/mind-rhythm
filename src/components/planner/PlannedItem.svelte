@@ -19,32 +19,30 @@
 	let startTimeInput: string = task.start_time;
 	let dueTimeInput: string = task.due_time;
 
-	$: taskState = getTastTimeState($clock);
-	function getTastTimeState(clock: string): TaskState {
-		const currTime = generateMemoDateTime(clock);
-		const startTime = generateMemoDateTime(task.start_time);
-		const endTime = generateMemoDateTime(task.due_time);
+	$: taskState = getTaskTime($clock);
 
-		// If in the past
-		if (currTime.getTime() >= startTime.getTime() && currTime.getTime() <= endTime.getTime()) {
+	function getTaskTime(clock: string): TaskState {
+		const currTime = generateMemoDateTime(clock).getTime();
+		const startTime = generateMemoDateTime(task.start_time).getTime();
+		const endTime = generateMemoDateTime(task.due_time).getTime();
+		if (currTime >= startTime && currTime <= endTime) {
 			return TaskState.Current;
 		}
-
-		if (currTime.getTime() > startTime.getTime()) {
-			return TaskState.Past;
-		}
-
-		if (currTime.getTime() < endTime.getTime()) {
-			return TaskState.Future;
-		}
-
 		return TaskState.Undefined;
 	}
 
 	function generateMemoDateTime(timeStr: string): Date {
-		const [h, m, s] = timeStr.match(/[^:\s]+/g) || ([] as string[]);
+		const [h, m, s, t] = timeStr.match(/[^:\s]+/g) || ([] as string[]);
 		const date = new Date();
-		date.setHours(+h);
+		let hours: number;
+		if (!t) {
+			// !t for AM
+			hours = +h;
+		} else {
+			// t for PM
+			hours = +h + 12;
+		}
+		date.setHours(hours);
 		date.setMinutes(+m);
 		date.setSeconds(+s);
 		return date;
@@ -103,14 +101,17 @@
 	}
 </script>
 
+<!-- class:opacity-50={taskState === TaskState.Past}
+class:variant-filled-primary={taskState === TaskState.Current}
+class:variant-soft={taskState === TaskState.Future} -->
 <li
 	class="card p-4 flex justify-between gap-8"
-	class:opacity-50={taskState === TaskState.Past}
 	class:variant-filled-primary={taskState === TaskState.Current}
-	class:variant-soft-primary={taskState === TaskState.Future}
+	class:variant-soft={taskState === TaskState.Past}
+	class:variant-filled-warning={taskState === TaskState.Future}
 >
 	<hgroup class="flex flex-col w-full">
-		{#if task.id !== $currentEditTask?.id}
+		{#if ID !== $currentEditTask?.id}
 			<button
 				on:dblclick={enableEditState}
 				use:popup={popupHover}
@@ -139,7 +140,7 @@
 		{/if}
 	</hgroup>
 	<div class="flex items-center gap-4">
-		{#if task.id !== $currentEditTask?.id}
+		{#if ID !== $currentEditTask?.id}
 			<button
 				on:dblclick={enableEditState}
 				use:popup={popupHover}

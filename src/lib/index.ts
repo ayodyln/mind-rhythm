@@ -34,8 +34,8 @@ const dailyTasksDB: RhythmTask[] = [
 		title: 'Client Meeting',
 		description: 'Discuss project updates with the client',
 		created_datetime: '2023-11-13T14:00:00',
-		start_time: '15:30:00',
-		due_time: '16:00:00',
+		start_time: '16:30:00',
+		due_time: '17:45:00',
 		pos: 4
 	},
 	{
